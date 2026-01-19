@@ -24,6 +24,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -338,13 +339,7 @@ export default function Landing() {
                     <p className="text-muted-foreground">{step.detail}</p>
                   </div>
 
-                  <Card className="flex-1 w-full p-8 bg-muted/50 backdrop-blur-sm border-primary/20">
-                    <div className="aspect-video bg-gradient-to-br from-background to-muted rounded-lg flex items-center justify-center">
-                      <div className="text-muted-foreground text-sm">
-                        Screenshot placeholder
-                      </div>
-                    </div>
-                  </Card>
+                  <div className="flex-1" />
                 </motion.div>
               ))}
             </div>
@@ -552,24 +547,24 @@ export default function Landing() {
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <a href="#features" className="hover:text-primary transition-colors">
+                  <Link to="/features" className="hover:text-primary transition-colors">
                     Features
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#pricing" className="hover:text-primary transition-colors">
+                  <Link to="/pricing" className="hover:text-primary transition-colors">
                     Pricing
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#download" className="hover:text-primary transition-colors">
+                  <Link to="/download" className="hover:text-primary transition-colors">
                     Download
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#docs" className="hover:text-primary transition-colors">
+                  <Link to="/documentation" className="hover:text-primary transition-colors">
                     Documentation
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -579,24 +574,24 @@ export default function Landing() {
               <h4 className="font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <a href="#privacy" className="hover:text-primary transition-colors">
+                  <Link to="/privacy" className="hover:text-primary transition-colors">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#terms" className="hover:text-primary transition-colors">
+                  <Link to="/terms" className="hover:text-primary transition-colors">
                     Terms of Service
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#license" className="hover:text-primary transition-colors">
+                  <Link to="/license" className="hover:text-primary transition-colors">
                     License Agreement
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#contact" className="hover:text-primary transition-colors">
+                  <Link to="/contact" className="hover:text-primary transition-colors">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

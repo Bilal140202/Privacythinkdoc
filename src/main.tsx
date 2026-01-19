@@ -13,6 +13,14 @@ import "./types/global.d.ts";
 const Landing = lazy(() => import("./pages/Landing.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const Features = lazy(() => import("./pages/Features.tsx"));
+const Pricing = lazy(() => import("./pages/Pricing.tsx"));
+const Download = lazy(() => import("./pages/Download.tsx"));
+const Documentation = lazy(() => import("./pages/Documentation.tsx"));
+const Privacy = lazy(() => import("./pages/Privacy.tsx"));
+const Terms = lazy(() => import("./pages/Terms.tsx"));
+const License = lazy(() => import("./pages/License.tsx"));
+const Contact = lazy(() => import("./pages/Contact.tsx"));
 
 // Simple loading fallback for route transitions
 function RouteLoading() {
@@ -62,6 +70,14 @@ createRoot(document.getElementById("root")!).render(
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/auth" element={<AuthPage redirectAfterAuth="/" />} /> {/* TODO: change redirect after auth to correct page */}
+              <Route path="/features" element={<Features />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/download" element={<Download />} />
+              <Route path="/documentation" element={<Documentation />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/license" element={<License />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
