@@ -1,20 +1,23 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   Lock,
   FileText,
   Zap,
   Brain,
   Code,
-  FileCheck,
   Shield,
-  Globe,
   Download,
   Github,
   CheckCircle2,
   XCircle,
-  ChevronDown,
-  ExternalLink,
+  Server,
+  HardDrive,
+  Eye,
+  EyeOff,
+  Cpu,
+  Database,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,21 +29,6 @@ import {
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const staggerChildren = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -48,10 +36,9 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={fadeInUp}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className={className}
     >
       {children}
@@ -59,461 +46,510 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
   );
 }
 
-export default function Landing() {
+// Animated grid background component
+function PrivacyGrid() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
-        </div>
+    <div className="absolute inset-0 overflow-hidden opacity-20">
+      <div className="absolute inset-0" style={{
+        backgroundImage: `
+          linear-gradient(to right, hsl(var(--primary) / 0.1) 1px, transparent 1px),
+          linear-gradient(to bottom, hsl(var(--primary) / 0.1) 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px'
+      }} />
+    </div>
+  );
+}
 
-        {/* Floating Orbs */}
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-20 left-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute bottom-20 right-20 w-96 h-96 bg-secondary/20 rounded-full blur-3xl"
-        />
+// Floating lock animation
+function FloatingLock() {
+  return (
+    <motion.div
+      animate={{
+        y: [-10, 10, -10],
+        rotate: [-2, 2, -2],
+      }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+      className="absolute top-20 right-20 opacity-10"
+    >
+      <Lock className="w-64 h-64 text-primary" />
+    </motion.div>
+  );
+}
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+export default function Landing() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background text-foreground overflow-hidden">
+      {/* Hero Section - Bold and Privacy-Focused */}
+      <section className="relative min-h-screen flex items-center justify-center">
+        <PrivacyGrid />
+        <FloatingLock />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
             transition={{ duration: 0.8 }}
+            className="text-center"
           >
+            {/* Lock Badge */}
             <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center justify-center w-20 h-20 mb-8 rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-2xl"
+              className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full border-2 border-primary/50 bg-primary/10 backdrop-blur-sm"
             >
-              <Lock className="w-10 h-10 text-primary-foreground" />
+              <Lock className="w-4 h-4 text-primary" />
+              <span className="text-sm font-semibold tracking-wider uppercase">Air-Gapped by Design</span>
             </motion.div>
 
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent leading-tight">
-              Your Documents.
-              <br />
-              Your AI. Your Privacy.
+            {/* Main Headline - Big and Bold */}
+            <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none">
+              <span className="block text-foreground">Your Documents.</span>
+              <span className="block text-primary mt-2">Your Device.</span>
+              <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mt-2">
+                Zero Cloud.
+              </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-              Analyze contracts, code, and documents with AI—100% locally.
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed">
+              Chat with PDFs, contracts & code using <span className="text-foreground font-semibold">local LLMs</span>.
               <br />
-              <span className="text-foreground font-semibold">
-                No cloud. No tracking. No subscriptions.
-              </span>
+              Everything runs on <span className="text-primary font-semibold">your hardware</span>. Nothing ever leaves.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all" asChild>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+              <Button
+                size="lg"
+                className="text-lg px-10 py-7 rounded-xl font-bold shadow-2xl hover:shadow-primary/50 transition-all hover:scale-105 bg-gradient-to-r from-primary to-secondary group"
+                asChild
+              >
                 <a href="https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe" download>
-                  <Download className="mr-2 h-5 w-5" />
-                  Download for Windows
+                  <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                  Download PrivacyThink
+                  <span className="ml-2 text-xs bg-white/20 px-2 py-1 rounded">Free Beta</span>
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg px-10 py-7 rounded-xl border-2 hover:bg-primary/10 font-semibold"
+                asChild
+              >
                 <a href="https://github.com/Bilal140202/Privacythink" target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-5 w-5" />
-                  View on GitHub
+                  View Source
                 </a>
               </Button>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="mt-16"
-            >
-              <ChevronDown className="w-8 h-8 mx-auto animate-bounce text-muted-foreground" />
-            </motion.div>
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-primary" />
+                <span>100% Open Source</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Lock className="w-4 h-4 text-primary" />
+                <span>Zero Telemetry</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <HardDrive className="w-4 h-4 text-primary" />
+                <span>Runs Offline</span>
+              </div>
+            </div>
           </motion.div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
+          <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex items-start justify-center p-2">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-1.5 h-1.5 bg-primary rounded-full"
+            />
+          </div>
+        </motion.div>
       </section>
 
-      {/* Problem Statement */}
-      <AnimatedSection className="py-24 px-6">
+      {/* Privacy Statement - Bold Visual */}
+      <AnimatedSection className="py-32 px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            Stop Feeding Your Data to the Cloud
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Cloud AI Tools */}
-            <Card className="p-8 border-destructive/50 bg-destructive/5">
-              <div className="flex items-center gap-3 mb-6">
-                <XCircle className="w-8 h-8 text-destructive" />
-                <h3 className="text-2xl font-semibold">Cloud AI Tools</h3>
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            {/* Left: The Problem */}
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-destructive/10 border border-destructive/30">
+                <EyeOff className="w-4 h-4 text-destructive" />
+                <span className="text-sm font-semibold">The Cloud Problem</span>
               </div>
-              <ul className="space-y-4">
+
+              <h2 className="text-4xl md:text-5xl font-black">
+                Stop Uploading Your
+                <span className="block text-destructive mt-2">Private Documents</span>
+              </h2>
+
+              <div className="space-y-4">
                 {[
-                  "Uploads your files",
-                  "$20-30/month",
-                  "Requires internet",
-                  "Data sold to advertisers",
-                  "Terms of service trap",
-                ].map((item, i) => (
-                  <motion.li
+                  "ChatGPT reads your contracts",
+                  "Claude indexes your code",
+                  "Gemini trains on your data",
+                  "Your secrets become their product"
+                ].map((text, i) => (
+                  <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
+                    viewport={{ once: true }}
                     className="flex items-center gap-3"
                   >
-                    <XCircle className="w-5 h-5 text-destructive flex-shrink-0" />
-                    <span className="text-muted-foreground">{item}</span>
-                  </motion.li>
+                    <XCircle className="w-6 h-6 text-destructive flex-shrink-0" />
+                    <span className="text-lg text-muted-foreground">{text}</span>
+                  </motion.div>
                 ))}
-              </ul>
-            </Card>
-
-            {/* PrivacyThink */}
-            <Card className="p-8 border-primary/50 bg-primary/5">
-              <div className="flex items-center gap-3 mb-6">
-                <CheckCircle2 className="w-8 h-8 text-primary" />
-                <h3 className="text-2xl font-semibold">PrivacyThink</h3>
               </div>
-              <ul className="space-y-4">
-                {[
-                  "Files stay on your device",
-                  "One-time payment",
-                  "Works offline",
-                  "Zero telemetry",
-                  "You own everything",
-                ].map((item, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="font-medium">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
+            </div>
+
+            {/* Right: The Solution */}
+            <Card className="p-12 border-2 border-primary/50 bg-gradient-to-br from-primary/5 to-secondary/5 shadow-2xl">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/50">
+                  <Eye className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-semibold">The PrivacyThink Way</span>
+                </div>
+
+                <h3 className="text-3xl font-bold">
+                  Your Data Never Leaves
+                  <span className="block text-primary">Your Machine</span>
+                </h3>
+
+                <div className="space-y-3">
+                  {[
+                    "AI runs on your CPU",
+                    "Database stays local",
+                    "No internet required",
+                    "You control everything"
+                  ].map((text, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex items-center gap-3"
+                    >
+                      <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0" />
+                      <span className="text-lg font-medium">{text}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="pt-6 border-t border-primary/20">
+                  <p className="text-sm text-muted-foreground italic">
+                    "Not just privacy by policy. Privacy by <span className="text-primary font-semibold">architecture</span>."
+                  </p>
+                </div>
+              </div>
             </Card>
           </div>
         </div>
       </AnimatedSection>
 
-      {/* Features Grid */}
-      <AnimatedSection className="py-24 px-6 bg-muted/30">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            Built for Professionals Who Value Privacy
-          </h2>
-          <p className="text-xl text-muted-foreground text-center mb-16">
-            Everything you need to work securely with AI
-          </p>
+      {/* Features - Technical & Powerful */}
+      <AnimatedSection className="py-32 px-6 bg-muted/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-primary/10 border border-primary/30">
+              <Cpu className="w-4 h-4 text-primary" />
+              <span className="text-sm font-semibold">Powered by Local Hardware</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black mb-4">
+              Enterprise AI.
+              <span className="block text-primary">Consumer Hardware.</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Qwen 0.5B to Llama 7B. Running on your laptop, not our servers.
+            </p>
+          </div>
 
-          <motion.div
-            variants={staggerChildren}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: Lock,
-                title: "100% Air-Gapped",
-                description:
-                  "Works without internet. Your data never leaves your computer.",
-                gradient: "from-primary to-secondary",
-              },
-              {
-                icon: FileText,
-                title: "Universal Document Support",
-                description:
-                  "PDF, Word, code files (65+ formats) even scanned documents with OCR.",
-                gradient: "from-secondary to-accent",
-              },
-              {
-                icon: Zap,
-                title: "Instant Answers",
-                description:
-                  "Ask questions, get cited responses. Sub-10ms semantic search.",
-                gradient: "from-accent to-primary",
-              },
-              {
                 icon: Brain,
-                title: "Multiple AI Models",
-                description:
-                  "Choose from 0.5B to 7B models. Runs on any laptop (8GB+ RAM).",
-                gradient: "from-primary to-accent",
+                title: "Local LLMs",
+                description: "Bundled with Qwen 0.5B. Download larger models up to 7B.",
+                metric: "Sub-10ms",
+                metricLabel: "inference"
+              },
+              {
+                icon: Database,
+                title: "Vector Search",
+                description: "SQLite vector database for instant semantic search.",
+                metric: "65+ Formats",
+                metricLabel: "supported"
               },
               {
                 icon: Code,
-                title: "Code-Aware Analysis",
-                description:
-                  "Understands Python, Rust, JS, etc. Preserves function boundaries.",
-                gradient: "from-secondary to-primary",
-              },
-              {
-                icon: FileCheck,
-                title: "Smart Citations",
-                description:
-                  "Every answer shows source pages. Click to see original context.",
-                gradient: "from-accent to-secondary",
+                title: "Code Aware",
+                description: "Understands Python, Rust, JS. Preserves syntax.",
+                metric: "100% Private",
+                metricLabel: "guaranteed"
               },
             ].map((feature, i) => (
-              <motion.div key={i} variants={fadeInUp}>
-                <Card className="p-6 h-full backdrop-blur-sm bg-card/50 border-border/50 hover:bg-card/80 transition-all hover:shadow-lg group">
-                  <div
-                    className={`inline-flex items-center justify-center w-12 h-12 mb-4 rounded-lg bg-gradient-to-br ${feature.gradient} shadow-lg group-hover:scale-110 transition-transform`}
-                  >
-                    <feature.icon className="w-6 h-6 text-primary-foreground" />
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.15 }}
+                viewport={{ once: true }}
+              >
+                <Card className="p-8 h-full border-2 border-border hover:border-primary/50 transition-all hover:shadow-xl group">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <feature.icon className="w-7 h-7 text-primary-foreground" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </p>
+                  <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">{feature.description}</p>
+                  <div className="pt-6 border-t border-border">
+                    <div className="text-3xl font-black text-primary">{feature.metric}</div>
+                    <div className="text-sm text-muted-foreground uppercase tracking-wider">{feature.metricLabel}</div>
+                  </div>
                 </Card>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
-      </AnimatedSection>
-
-      {/* How It Works */}
-      <AnimatedSection className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            From Upload to Insight in 3 Steps
-          </h2>
-
-          <div className="relative">
-            {/* Connection Line */}
-            <div className="hidden lg:block absolute top-32 left-1/2 -translate-x-1/2 h-64 w-1 bg-gradient-to-b from-primary via-secondary to-accent" />
-
-            <div className="space-y-16 lg:space-y-32">
-              {[
-                {
-                  number: "1",
-                  title: "Upload",
-                  description: "Drag & drop any document",
-                  detail: "Supports PDF, Word, Markdown, code files, and more",
-                },
-                {
-                  number: "2",
-                  title: "Index",
-                  description: "AI creates private searchable index",
-                  detail: "Local embedding generation with semantic chunking",
-                },
-                {
-                  number: "3",
-                  title: "Ask",
-                  description: "Get instant, cited answers",
-                  detail: "RAG-powered responses with source attribution",
-                },
-              ].map((step, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className={`flex flex-col lg:flex-row items-center gap-8 ${
-                    i % 2 === 1 ? "lg:flex-row-reverse" : ""
-                  }`}
-                >
-                  <div className="flex-1 text-center lg:text-left">
-                    <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground text-2xl font-bold shadow-xl">
-                      {step.number}
-                    </div>
-                    <h3 className="text-3xl font-bold mb-3">{step.title}</h3>
-                    <p className="text-xl text-foreground mb-2">
-                      {step.description}
-                    </p>
-                    <p className="text-muted-foreground">{step.detail}</p>
-                  </div>
-
-                  <div className="flex-1" />
-                </motion.div>
-              ))}
-            </div>
           </div>
         </div>
       </AnimatedSection>
 
-      {/* Privacy Guarantee */}
-      <AnimatedSection className="py-24 px-6 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
+      {/* How It Works - Visual Process */}
+      <AnimatedSection className="py-32 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-black mb-4">
+              Three Steps.
+              <span className="block text-primary">Complete Privacy.</span>
+            </h2>
+          </div>
+
+          <div className="space-y-12">
+            {[
+              {
+                step: "01",
+                title: "Drop Your Files",
+                description: "PDFs, DOCX, code—anything. Drag and drop into PrivacyThink.",
+                icon: FileText,
+              },
+              {
+                step: "02",
+                title: "Local Indexing",
+                description: "AI chunks and embeds your documents. All processing happens on your CPU.",
+                icon: Cpu,
+              },
+              {
+                step: "03",
+                title: "Ask Questions",
+                description: "Get instant answers with citations. No API calls. No internet required.",
+                icon: Zap,
+              },
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <Card className="p-10 border-2 border-border hover:border-primary/50 transition-all">
+                  <div className="flex flex-col md:flex-row items-start gap-8">
+                    <div className="flex-shrink-0">
+                      <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                        <step.icon className="w-10 h-10 text-primary-foreground" />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-6xl font-black text-primary/20 mb-2">{step.step}</div>
+                      <h3 className="text-3xl font-bold mb-3">{step.title}</h3>
+                      <p className="text-xl text-muted-foreground leading-relaxed">{step.description}</p>
+                    </div>
+                  </div>
+                </Card>
+
+                {i < 2 && (
+                  <div className="flex justify-center py-6">
+                    <ArrowRight className="w-8 h-8 text-primary rotate-90" />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Zero Telemetry Promise */}
+      <AnimatedSection className="py-32 px-6 bg-gradient-to-br from-primary/10 via-secondary/5 to-background">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200 }}
             viewport={{ once: true }}
-            className="inline-flex items-center justify-center w-24 h-24 mb-8 rounded-full bg-gradient-to-br from-primary to-secondary shadow-2xl"
+            className="inline-flex items-center justify-center w-28 h-28 mb-8 rounded-full bg-gradient-to-br from-primary to-secondary shadow-2xl"
           >
-            <Shield className="w-12 h-12 text-primary-foreground" />
+            <Lock className="w-14 h-14 text-primary-foreground" />
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Your Data. Your Device. Period.
+          <h2 className="text-4xl md:text-6xl font-black mb-8">
+            The Zero-Server
+            <span className="block text-primary">Promise</span>
           </h2>
 
-          <Card className="p-12 mb-12 backdrop-blur-sm bg-card/50 border-primary/30">
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-primary flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5" />
-                  On Your Device
-                </h3>
-                <ul className="space-y-2 text-left text-muted-foreground">
-                  <li>✓ Local AI processing</li>
-                  <li>✓ Local database</li>
-                  <li>✓ Local models</li>
-                  <li>✓ Offline capable</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-4 text-destructive flex items-center gap-2">
-                  <XCircle className="w-5 h-5" />
-                  Never Leaves
-                </h3>
-                <ul className="space-y-2 text-left text-muted-foreground">
-                  <li>✗ No cloud sync</li>
-                  <li>✗ No analytics</li>
-                  <li>✗ No tracking</li>
-                  <li>✗ No telemetry</li>
-                </ul>
-              </div>
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <Card className="p-8 border-2 border-destructive/30 bg-destructive/5">
+              <Server className="w-12 h-12 text-destructive mb-4 mx-auto" />
+              <h3 className="text-2xl font-bold mb-4">❌ No Servers</h3>
+              <p className="text-muted-foreground">No cloud storage. No API endpoints. Nothing to hack.</p>
+            </Card>
+            <Card className="p-8 border-2 border-primary/30 bg-primary/5">
+              <HardDrive className="w-12 h-12 text-primary mb-4 mx-auto" />
+              <h3 className="text-2xl font-bold mb-4">✓ Your Hardware</h3>
+              <p className="text-muted-foreground">Everything runs and stays on your local machine.</p>
+            </Card>
+          </div>
+
+          <blockquote className="text-2xl font-medium italic border-l-4 border-primary pl-8 text-left max-w-2xl mx-auto mb-12">
+            "PrivacyThink can't see your data because we <span className="text-primary font-bold">architected it that way</span>.
+            Not a privacy policy—a physical impossibility."
+          </blockquote>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <div className="px-6 py-3 rounded-full bg-background/80 border-2 border-primary/30 font-semibold">
+              GDPR Compliant
             </div>
-
-            <blockquote className="text-lg italic text-foreground leading-relaxed border-l-4 border-primary pl-6">
-              PrivacyThink is air-gapped by design. Your documents, questions,
-              and AI responses never touch the internet. Perfect for lawyers,
-              engineers, and anyone who values true digital privacy.
-            </blockquote>
-          </Card>
-
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              { icon: Lock, text: "GDPR Compliant" },
-              { icon: Shield, text: "HIPAA Ready" },
-              { icon: Globe, text: "Works Offline" },
-            ].map((badge, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-background/80 backdrop-blur-sm border border-border shadow-lg"
-              >
-                <badge.icon className="w-5 h-5 text-primary" />
-                <span className="font-semibold">{badge.text}</span>
-              </motion.div>
-            ))}
+            <div className="px-6 py-3 rounded-full bg-background/80 border-2 border-primary/30 font-semibold">
+              HIPAA Ready
+            </div>
+            <div className="px-6 py-3 rounded-full bg-background/80 border-2 border-primary/30 font-semibold">
+              SOC 2 Aligned
+            </div>
           </div>
         </div>
       </AnimatedSection>
 
-      {/* Download CTA */}
-      <AnimatedSection className="py-24 px-6">
+      {/* Download CTA - Strong and Clear */}
+      <AnimatedSection className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Ready to Reclaim Your Privacy?
+          <h2 className="text-5xl md:text-6xl font-black mb-6">
+            Ready to Reclaim
+            <span className="block text-primary">Your Privacy?</span>
           </h2>
-          <p className="text-xl text-muted-foreground mb-12">
-            Join thousands of professionals using PrivacyThink
+          <p className="text-2xl text-muted-foreground mb-12">
+            Join professionals who refuse to compromise on data security.
           </p>
 
-          <Card className="p-12 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 border-primary/30">
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold mb-2">PrivacyThink v1.0</h3>
-              <p className="text-muted-foreground">For Windows 10/11 (64-bit)</p>
+          <Card className="p-12 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 border-2 border-primary/30 shadow-2xl">
+            <div className="space-y-8">
+              <div>
+                <div className="text-4xl font-black mb-2">PrivacyThink v0.1.2</div>
+                <p className="text-lg text-muted-foreground">Windows 10/11 • 64-bit • ~500MB</p>
+              </div>
+
+              <Button
+                size="lg"
+                className="text-2xl px-16 py-10 rounded-xl font-black shadow-2xl hover:shadow-primary/50 transition-all hover:scale-105 bg-gradient-to-r from-primary to-secondary"
+                asChild
+              >
+                <a href="https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe" download>
+                  <Download className="mr-3 h-8 w-8" />
+                  Download Now — Free
+                </a>
+              </Button>
+
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span>Free during beta</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span>No registration</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span>Works offline</span>
+                </div>
+              </div>
+
+              <Accordion type="single" collapsible className="text-left max-w-md mx-auto">
+                <AccordionItem value="requirements" className="border-border/50">
+                  <AccordionTrigger className="text-base hover:text-primary">
+                    System Requirements
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    <ul className="space-y-2 pl-4">
+                      <li>• Windows 10/11 (64-bit)</li>
+                      <li>• 8GB RAM minimum (16GB recommended)</li>
+                      <li>• 5GB free disk space</li>
+                      <li>• Internet for initial download only</li>
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
-
-            <Button
-              size="lg"
-              className="text-xl px-12 py-8 mb-8 shadow-2xl hover:shadow-primary/50 transition-all"
-              asChild
-            >
-              <a href="https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe" download>
-                <Download className="mr-3 h-6 w-6" />
-                Download Now (Free)
-              </a>
-            </Button>
-
-            <Accordion type="single" collapsible className="text-left max-w-md mx-auto">
-              <AccordionItem value="requirements" className="border-border/50">
-                <AccordionTrigger className="hover:text-primary">
-                  System Requirements
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  <ul className="space-y-2">
-                    <li>• Windows 10/11</li>
-                    <li>• 8GB RAM (16GB recommended)</li>
-                    <li>• 5GB free disk space</li>
-                    <li>• No internet required after installation</li>
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
           </Card>
         </div>
       </AnimatedSection>
 
-      {/* FAQ */}
-      <AnimatedSection className="py-24 px-6 bg-muted/30">
+      {/* FAQ - Minimal and Clean */}
+      <AnimatedSection className="py-32 px-6 bg-muted/20">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            Frequently Asked Questions
+          <h2 className="text-4xl md:text-5xl font-black text-center mb-16">
+            Questions?
           </h2>
 
           <Accordion type="single" collapsible className="space-y-4">
             {[
               {
-                q: "Does PrivacyThink require internet?",
-                a: "Only for the initial download. After installation, it works 100% offline.",
+                q: "Is my data really private?",
+                a: "Yes. Everything runs on your device. We can't access your data because we never receive it. This isn't a policy—it's how the software works."
               },
               {
-                q: "What file formats are supported?",
-                a: "65+ formats including PDF, Word, code files (Python, JavaScript, Rust, etc.), and images with OCR.",
+                q: "Do I need internet after installation?",
+                a: "No. After downloading PrivacyThink and the AI models, you can disconnect from the internet permanently. Everything runs locally."
+              },
+              {
+                q: "What file formats work?",
+                a: "65+ formats: PDF, DOCX, code files (Python, Rust, JS, Go, etc.), TXT, Markdown, and images with OCR support."
               },
               {
                 q: "How much does it cost?",
-                a: "Free for unlimited use. Includes all updates and new models all for free during beta.",
+                a: "Free during beta. No credit card, no account, no catch. We might add paid features later, but core functionality will remain free."
               },
               {
-                q: "Is my data really private?",
-                a: "Yes. Everything runs on your device. Zero telemetry, no cloud servers, no data collection.",
-              },
-              {
-                q: "What are the system requirements?",
-                a: "Windows 10/11, 8GB+ RAM, 5GB disk space. Works on any modern laptop.",
-              },
-              {
-                q: "Can I use it for legal/medical documents?",
-                a: "Absolutely. HIPAA and GDPR compliant because your data never leaves your device.",
-              },
-              {
-                q: "Which AI models are included?",
-                a: "Open Source Models. All running locally on your hardware.",
+                q: "Will this run on my laptop?",
+                a: "If you have 8GB RAM and Windows 10/11, yes. The bundled 0.5B model runs on any modern laptop. Larger models need more RAM."
               },
             ].map((faq, i) => (
-              <AccordionItem key={i} value={`item-${i}`} className="border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left hover:text-primary">
+              <AccordionItem key={i} value={`item-${i}`} className="border-2 border-border rounded-xl px-6 hover:border-primary/50 transition-colors">
+                <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-muted-foreground text-base leading-relaxed">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>
@@ -521,114 +557,77 @@ export default function Landing() {
           </Accordion>
 
           <p className="text-center mt-12 text-muted-foreground">
-            Still have questions?{" "}
-            <a
-              href="mailto:support@privacythink.com"
-              className="text-primary hover:underline"
-            >
-              Email us
-            </a>
+            More questions?{" "}
+            <Link to="/contact" className="text-primary font-semibold hover:underline">
+              Get in touch
+            </Link>
           </p>
         </div>
       </AnimatedSection>
 
-      {/* Footer */}
-      <footer className="py-16 px-6 bg-background border-t border-border">
-        <div className="max-w-6xl mx-auto">
+      {/* Footer - Clean and Professional */}
+      <footer className="py-16 px-6 border-t-2 border-border bg-background">
+        <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             {/* Brand */}
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                  <Lock className="w-5 h-5 text-primary-foreground" />
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <Lock className="w-6 h-6 text-primary-foreground" />
                 </div>
-                <span className="text-xl font-bold">PrivacyThink</span>
+                <span className="text-2xl font-black">PrivacyThink</span>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Privacy-first AI document analysis
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Privacy-first AI document analysis. Your data stays on your hardware.
               </p>
             </div>
 
             {/* Product */}
             <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link to="/features" className="hover:text-primary transition-colors">
-                    Features
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/pricing" className="hover:text-primary transition-colors">
-                    Pricing
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/download" className="hover:text-primary transition-colors">
-                    Download
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/documentation" className="hover:text-primary transition-colors">
-                    Documentation
-                  </Link>
-                </li>
+              <h4 className="font-bold text-lg mb-4">Product</h4>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li><Link to="/features" className="hover:text-primary transition-colors">Features</Link></li>
+                <li><Link to="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
+                <li><Link to="/download" className="hover:text-primary transition-colors">Download</Link></li>
+                <li><Link to="/documentation" className="hover:text-primary transition-colors">Documentation</Link></li>
               </ul>
             </div>
 
             {/* Legal */}
             <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link to="/privacy" className="hover:text-primary transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/terms" className="hover:text-primary transition-colors">
-                    Terms of Service
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/license" className="hover:text-primary transition-colors">
-                    License Agreement
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/contact" className="hover:text-primary transition-colors">
-                    Contact
-                  </Link>
-                </li>
+              <h4 className="font-bold text-lg mb-4">Legal</h4>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+                <li><Link to="/license" className="hover:text-primary transition-colors">License</Link></li>
+                <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
               </ul>
             </div>
 
-            {/* Social */}
+            {/* Connect */}
             <div>
-              <h4 className="font-semibold mb-4">Connect</h4>
+              <h4 className="font-bold text-lg mb-4">Connect</h4>
               <div className="flex gap-4">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/Bilal140202/Privacythink"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center"
+                  className="w-12 h-12 rounded-xl bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"
                 >
-                  <Github className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-colors flex items-center justify-center"
-                >
-                  <ExternalLink className="w-5 h-5" />
+                  <Github className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© 2026 PrivacyThink. All rights reserved.</p>
+          <div className="pt-8 border-t border-border">
+            <p className="text-center text-sm text-muted-foreground">
+              © 2026 PrivacyThink. Built by <span className="font-semibold">Bilal Ansari</span>. All rights reserved.
+            </p>
+            <p className="text-center text-xs text-muted-foreground mt-2">
+              <Lock className="inline w-3 h-3 mr-1" />
+              Your Documents. Your AI. Your Privacy.
+            </p>
           </div>
         </div>
       </footer>
