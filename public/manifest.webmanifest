@@ -1,16 +1,22 @@
 {
-  "name": "vly.ai application",
-  "short_name": "vly.ai",
-  "description": "vly.ai application",
+  "name": "PrivacyThink - Private AI Document Analysis",
+  "short_name": "PrivacyThink",
+  "description": "Analyze contracts, code, and documents with AI—100% locally. No cloud. No tracking.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#0a0a0a",
+  "theme_color": "#8b5cf6",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/png",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]
