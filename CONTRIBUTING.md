@@ -42,7 +42,7 @@ Feature requests are welcome! Please:
 
 ```bash
 # Fork and clone the repo
-git clone https://github.com/Bilal140202/Privacythink.git
+git clone https://github.com/Bilal140202/Privacythinkdoc.git
 cd privacythink
 
 # Install dependencies
@@ -171,9 +171,9 @@ Before working on major features:
 
 ## Questions?
 
-- Open a [Discussion](https://github.com/Bilal140202/Privacythink/discussions)
-- Email: hello@privacythink.com
-- Check existing [Issues](https://github.com/Bilal140202/Privacythink/issues)
+- Open a [Discussion](https://github.com/Bilal140202/Privacythinkdoc/discussions)
+- Email: hello@ansaribilal.com
+- Check existing [Issues](https://github.com/Bilal140202/Privacythinkdoc/issues)
 
 ## License
 

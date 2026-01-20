@@ -142,8 +142,8 @@ export default function Privacy() {
               <h3 className="text-2xl font-semibold mb-4">9. Contact</h3>
               <p className="text-muted-foreground">
                 If you have questions about this Privacy Policy, please contact us at{" "}
-                <a href="mailto:privacy@privacythink.com" className="text-primary hover:underline">
-                  privacy@privacythink.com
+                <a href="mailto:privacy@ansaribilal.com" className="text-primary hover:underline">
+                  privacy@ansaribilal.com
                 </a>
               </p>
             </div>

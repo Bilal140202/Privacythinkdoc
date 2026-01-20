@@ -176,8 +176,8 @@ export default function Terms() {
               <h3 className="text-2xl font-semibold mb-4">12. Contact</h3>
               <p className="text-muted-foreground">
                 Questions about these terms? Contact us at{" "}
-                <a href="mailto:legal@privacythink.com" className="text-primary hover:underline">
-                  legal@privacythink.com
+                <a href="mailto:legal@ansaribilal.com" className="text-primary hover:underline">
+                  legal@ansaribilal.com
                 </a>
               </p>
             </div>

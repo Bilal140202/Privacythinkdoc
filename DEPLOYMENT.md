@@ -294,9 +294,9 @@ npx pagespeed https://your-site.com
 ## Support
 
 Need help with deployment?
-- Email: support@privacythink.com
+- Email: support@ansaribilal.com
 - Documentation: [/documentation](/documentation)
-- Issues: [GitHub Issues](https://github.com/Bilal140202/Privacythink/issues)
+- Issues: [GitHub Issues](https://github.com/Bilal140202/Privacythinkdoc/issues)
 
 ---
 

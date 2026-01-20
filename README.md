@@ -25,7 +25,7 @@ PrivacyThink is a secure, high-performance desktop application that enables you 
 
 ### Installation
 
-1. Download the latest [PrivacyThink_0.1.2_x64-setup.exe](https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe) from the Releases page.
+1. Download the latest [PrivacyThink_0.1.2_x64-setup.exe](https://github.com/Bilal140202/Privacythinkdoc/releases/download/v0.1.2/PrivacyThink_0.1.2_x64-setup.exe) from the Releases page.
 2. Run the installer.
 3. Launch PrivacyThink and follow the **System Check** to ensure optimal performance.
 
@@ -66,7 +66,7 @@ PrivacyThink is built on the principle of **Zero-Server Architecture**.
 
 ## 🌐 Web Landing Page
 
-This repository contains the marketing website for PrivacyThink. Visit [https://privacythink.com](https://privacythink.com) to learn more.
+This repository contains the marketing website for PrivacyThink. Visit [https://privacythink.netlify.app](https://privacythink.netlify.app) to learn more.
 
 ### Pages
 - **/** - Home page with hero, features, and FAQ
@@ -92,7 +92,7 @@ This repository contains the marketing website for PrivacyThink. Visit [https://
 
 ```bash
 # Clone the repository
-git clone https://github.com/Bilal140202/Privacythink.git
+git clone https://github.com/Bilal140202/Privacythinkdoc.git
 cd privacythink
 
 # Install dependencies
@@ -225,8 +225,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Built by Bilal Ansari**
 
 - GitHub: [@bilalansari](https://github.com/bilalansari)
-- Email: hello@privacythink.com
-- Website: [privacythink.com](https://privacythink.com)
+- Email: hello@ansaribilal.com
+- Website: [privacythink.com](https://privacythink.netlify.app)
 
 ---
 
@@ -243,16 +243,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Support
 
-- **Email**: support@privacythink.com
+- **Email**: support@ansaribilal.com
 - **Documentation**: [/documentation](/documentation)
-- **Issues**: [GitHub Issues](https://github.com/Bilal140202/Privacythink/issues)
-- **Privacy Questions**: privacy@privacythink.com
+- **Issues**: [GitHub Issues](https://github.com/Bilal140202/Privacythinkdoc/issues)
+- **Privacy Questions**: privacy@ansaribilal.com
 
 ---
 
 ## 🔒 Security
 
-We take security seriously. If you discover a security vulnerability, please email security@privacythink.com instead of using the issue tracker.
+We take security seriously. If you discover a security vulnerability, please email security@ansaribilal.com instead of using the issue tracker.
 
 ---
 
@@ -260,7 +260,7 @@ We take security seriously. If you discover a security vulnerability, please ema
   <strong>Your Documents. Your AI. Your Privacy.</strong>
   <br />
   <br />
-  <a href="https://privacythink.com">Website</a> •
+  <a href="https://privacythink.netlify.app">Website</a> •
   <a href="/documentation">Documentation</a> •
   <a href="/download">Download</a>
 </div>

@@ -180,8 +180,8 @@ export default function License() {
               </p>
               <p className="text-muted-foreground">
                 <strong>Email:</strong>{" "}
-                <a href="mailto:legal@privacythink.com" className="text-primary hover:underline">
-                  legal@privacythink.com
+                <a href="mailto:legal@ansaribilal.com" className="text-primary hover:underline">
+                  legal@ansaribilal.com
                 </a>
               </p>
             </Card>

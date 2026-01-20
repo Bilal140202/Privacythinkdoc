@@ -193,7 +193,7 @@ export default function Documentation() {
               },
               {
                 q: "What if I have a problem?",
-                a: "Visit our GitHub Issues page or email support@privacythink.com. Check logs in Settings > Advanced > View Logs.",
+                a: "Visit our GitHub Issues page or email support@ansaribilal.com. Check logs in Settings > Advanced > View Logs.",
               },
             ].map((faq, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border border-border rounded-lg px-6">

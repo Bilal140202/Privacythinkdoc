@@ -134,7 +134,7 @@ export default function Landing() {
                 className="text-base px-8 py-6 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] bg-gradient-to-r from-primary to-secondary group"
                 asChild
               >
-                <a href="https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe" download>
+                <a href="https://github.com/Bilal140202/Privacythinkdocdoc/releases/download/v0.1.2/PrivacyThink_0.1.2_x64-setup.exe" download>
                   <Download className="mr-2 h-5 w-5" />
                   Download PrivacyThink
                   <span className="ml-2 text-xs bg-white/20 px-2 py-0.5 rounded-md">Beta</span>
@@ -146,7 +146,7 @@ export default function Landing() {
                 className="text-base px-8 py-6 rounded-lg border hover:bg-primary/5 font-medium"
                 asChild
               >
-                <a href="https://github.com/Bilal140202/Privacythink" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/Bilal140202/Privacythinkdoc" target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-5 w-5" />
                   View Source
                 </a>
@@ -473,7 +473,7 @@ export default function Landing() {
                 className="text-lg px-10 py-6 rounded-lg font-bold shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] bg-gradient-to-r from-primary to-secondary"
                 asChild
               >
-                <a href="https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe" download>
+                <a href="https://github.com/Bilal140202/Privacythinkdocdoc/releases/download/v0.1.2/PrivacyThink_0.1.2_x64-setup.exe" download>
                   <Download className="mr-2 h-5 w-5" />
                   Download Now — Free
                 </a>
@@ -608,7 +608,7 @@ export default function Landing() {
               <h4 className="font-semibold text-base mb-3">Connect</h4>
               <div className="flex gap-3">
                 <a
-                  href="https://github.com/Bilal140202/Privacythink"
+                  href="https://github.com/Bilal140202/Privacythinkdoc"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-all flex items-center justify-center group"

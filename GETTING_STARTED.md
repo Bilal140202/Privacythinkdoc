@@ -8,7 +8,7 @@ Welcome! This guide will help you get the PrivacyThink landing page up and runni
 
 ```bash
 # Clone the repository
-git clone https://github.com/Bilal140202/Privacythink.git
+git clone https://github.com/Bilal140202/Privacythinkdoc.git
 cd privacythink
 
 # Install dependencies
@@ -81,7 +81,7 @@ git commit -m "Initial commit"
 
 # Push to GitHub
 git branch -M main
-git remote add origin https://github.com/Bilal140202/Privacythink.git
+git remote add origin https://github.com/Bilal140202/Privacythinkdoc.git
 git push -u origin main
 ```
 
@@ -287,8 +287,8 @@ npx convex dev         # Watch mode
 
 ## 🆘 Need Help?
 
-- **Email**: support@privacythink.com
-- **Issues**: [GitHub Issues](https://github.com/Bilal140202/Privacythink/issues)
+- **Email**: support@ansaribilal.com
+- **Issues**: [GitHub Issues](https://github.com/Bilal140202/Privacythinkdoc/issues)
 - **Documentation**: [/documentation](/documentation)
 
 ---
