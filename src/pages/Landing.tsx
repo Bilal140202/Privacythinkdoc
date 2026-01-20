@@ -118,13 +118,17 @@ export default function Landing() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all">
-                <Download className="mr-2 h-5 w-5" />
-                Download for Windows
+              <Button size="lg" className="text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all" asChild>
+                <a href="https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe" download>
+                  <Download className="mr-2 h-5 w-5" />
+                  Download for Windows
+                </a>
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                <Github className="mr-2 h-5 w-5" />
-                View on GitHub
+              <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
+                <a href="https://github.com/Bilal140202/Privacythink" target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 h-5 w-5" />
+                  View on GitHub
+                </a>
               </Button>
             </div>
 
@@ -440,9 +444,12 @@ export default function Landing() {
             <Button
               size="lg"
               className="text-xl px-12 py-8 mb-8 shadow-2xl hover:shadow-primary/50 transition-all"
+              asChild
             >
-              <Download className="mr-3 h-6 w-6" />
-              Download Now (Free)
+              <a href="https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe" download>
+                <Download className="mr-3 h-6 w-6" />
+                Download Now (Free)
+              </a>
             </Button>
 
             <Accordion type="single" collapsible className="text-left max-w-md mx-auto">

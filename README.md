@@ -25,7 +25,7 @@ PrivacyThink is a secure, high-performance desktop application that enables you 
 
 ### Installation
 
-1. Download the latest `PrivacyThink_0.1.0_x64-setup.exe` from the [Releases](https://github.com/releases) page.
+1. Download the latest [PrivacyThink_0.1.2_x64-setup.exe](https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe) from the Releases page.
 2. Run the installer.
 3. Launch PrivacyThink and follow the **System Check** to ensure optimal performance.
 
@@ -92,7 +92,7 @@ This repository contains the marketing website for PrivacyThink. Visit [https://
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/privacythink.git
+git clone https://github.com/Bilal140202/Privacythink.git
 cd privacythink
 
 # Install dependencies
@@ -245,7 +245,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Email**: support@privacythink.com
 - **Documentation**: [/documentation](/documentation)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/privacythink/issues)
+- **Issues**: [GitHub Issues](https://github.com/Bilal140202/Privacythink/issues)
 - **Privacy Questions**: privacy@privacythink.com
 
 ---

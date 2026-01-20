@@ -28,7 +28,7 @@
 ### Desktop Application
 Download the installer for your platform:
 
-- **Windows**: [PrivacyThink_0.1.0_x64-setup.exe](https://github.com/yourusername/privacythink/releases/download/v0.1.0/PrivacyThink_0.1.0_x64-setup.exe)
+- **Windows**: [PrivacyThink_0.1.2_x64-setup.exe](https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe)
 - **Mac**: Coming soon
 - **Linux**: Coming soon
 
@@ -65,7 +65,7 @@ This release includes:
 
 Need help? Reach out:
 - Email: support@privacythink.com
-- Issues: [GitHub Issues](https://github.com/yourusername/privacythink/issues)
+- Issues: [GitHub Issues](https://github.com/Bilal140202/Privacythink/issues)
 - Documentation: [docs](https://privacythink.com/documentation)
 
 ## 🙏 Acknowledgments
@@ -74,4 +74,4 @@ Thanks to all contributors who made this release possible!
 
 ---
 
-**Full Changelog**: [v0.0.0...v0.1.0](https://github.com/yourusername/privacythink/compare/v0.0.0...v0.1.0)
+**Full Changelog**: [v0.0.0...v0.1.0](https://github.com/Bilal140202/Privacythink/compare/v0.0.0...v0.1.0)

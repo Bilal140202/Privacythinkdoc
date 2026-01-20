@@ -296,7 +296,7 @@ npx pagespeed https://your-site.com
 Need help with deployment?
 - Email: support@privacythink.com
 - Documentation: [/documentation](/documentation)
-- Issues: [GitHub Issues](https://github.com/yourusername/privacythink/issues)
+- Issues: [GitHub Issues](https://github.com/Bilal140202/Privacythink/issues)
 
 ---
 

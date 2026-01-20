@@ -56,9 +56,12 @@ export default function Download() {
               <Button
                 size="lg"
                 className="text-xl px-12 py-8 mb-8 shadow-2xl hover:shadow-primary/50 transition-all"
+                asChild
               >
-                <DownloadIcon className="mr-3 h-6 w-6" />
-                Download Installer
+                <a href="https://github.com/Bilal140202/Privacythink/releases/download/v0.1.0/PrivacyThink_0.1.2_x64-setup.exe" download>
+                  <DownloadIcon className="mr-3 h-6 w-6" />
+                  Download Installer
+                </a>
               </Button>
 
               <p className="text-sm text-muted-foreground mb-8">
